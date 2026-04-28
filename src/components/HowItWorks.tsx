@@ -1,5 +1,4 @@
-const BRAND = "#2563eb";
-const GRADIENT = "linear-gradient(135deg, #2563eb 0%, #7c3aed 100%)";
+import { C } from "@/lib/design";
 
 const employerSteps = [
   { n: "01", title: "Create an account",  desc: "Sign up as an employer in under 2 minutes." },
@@ -16,15 +15,15 @@ const workerSteps = [
 
 export default function HowItWorks() {
   return (
-    <section id="how-it-works" style={{ background: "#ffffff", padding: "80px 32px" }}>
+    <section id="how-it-works" style={{ background: C.bgLight, padding: "80px 32px 120px", position: "relative", overflow: "hidden" }}>
       <div style={{ maxWidth: 1200, margin: "0 auto" }}>
         <div style={{ textAlign: "center", marginBottom: 56 }}>
-          <div style={{ display: "inline-flex", alignItems: "center", gap: 6, padding: "5px 14px", borderRadius: 100, background: "#eff6ff", border: "1px solid #bfdbfe", fontSize: 11, fontWeight: 700, color: BRAND, textTransform: "uppercase", letterSpacing: "0.08em", marginBottom: 16 }}>
+          <div style={{ display: "inline-flex", alignItems: "center", gap: 6, padding: "5px 14px", borderRadius: 100, background: C.goldBg, border: `1px solid rgba(201,162,39,0.4)`, fontSize: 11, fontWeight: 700, color: C.gold, textTransform: "uppercase", letterSpacing: "0.08em", marginBottom: 16 }}>
             How It Works
           </div>
-          <h2 style={{ fontSize: "clamp(28px,3.5vw,42px)", fontWeight: 900, color: "#0f172a", letterSpacing: "-1px", lineHeight: 1.2, marginBottom: 14 }}>
+          <h2 style={{ fontSize: "clamp(28px,3.5vw,42px)", fontWeight: 900, color: C.navyDeep, letterSpacing: "-1px", lineHeight: 1.2, marginBottom: 14 }}>
             Simple for everyone,{" "}
-            <span style={{ background: GRADIENT, WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", backgroundClip: "text" }}>powerful under the hood</span>
+            <span style={{ color: C.navyLight }}>powerful under the hood</span>
           </h2>
           <p style={{ fontSize: 16, color: "#64748b", maxWidth: 480, margin: "0 auto" }}>
             Two sides, one platform. Here&apos;s how it flows.
@@ -32,29 +31,36 @@ export default function HowItWorks() {
         </div>
 
         <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 24 }}>
-          <Column title="For Employers" sub="Fill shifts fast" color={BRAND} bg="#eff6ff" border="#bfdbfe" steps={employerSteps} />
-          <Column title="For Workers" sub="Find work your way" color="#7c3aed" bg="#f5f3ff" border="#ddd6fe" steps={workerSteps} />
+          <Column title="For Employers" sub="Fill shifts fast" steps={employerSteps} />
+          <Column title="For Workers" sub="Find work your way" steps={workerSteps} />
         </div>
+      </div>
+
+      {/* Diagonal divider — top-right to bottom-left */}
+      <div style={{ position: "absolute", bottom: 0, left: 0, right: 0 }}>
+        <svg viewBox="0 0 1440 80" fill="none" xmlns="http://www.w3.org/2000/svg" style={{ display: "block" }}>
+          <path d="M0 80L1440 0V80H0Z" fill={C.navyDeep} />
+        </svg>
       </div>
     </section>
   );
 }
 
-function Column({ title, sub, color, bg, border, steps }: { title: string; sub: string; color: string; bg: string; border: string; steps: typeof employerSteps }) {
+function Column({ title, sub, steps }: { title: string; sub: string; steps: typeof employerSteps }) {
   return (
-    <div style={{ borderRadius: 20, overflow: "hidden", border: "1px solid #e2e8f0", boxShadow: "0 2px 16px rgba(0,0,0,0.04)" }}>
-      <div style={{ padding: "20px 24px", borderBottom: "1px solid #e2e8f0", background: "#fafafa", display: "flex", alignItems: "center", gap: 12 }}>
-        <span style={{ padding: "4px 12px", borderRadius: 6, fontSize: 11, fontWeight: 700, background: bg, color, border: `1px solid ${border}` }}>{title}</span>
-        <span style={{ fontSize: 15, fontWeight: 700, color: "#0f172a" }}>{sub}</span>
+    <div style={{ borderRadius: 20, overflow: "hidden", border: `1px solid ${C.border}`, boxShadow: "0 2px 16px rgba(0,0,0,0.06)" }}>
+      <div style={{ padding: "20px 24px", borderBottom: `1px solid ${C.border}`, background: C.navyDeep, display: "flex", alignItems: "center", gap: 12 }}>
+        <span style={{ padding: "4px 12px", borderRadius: 6, fontSize: 11, fontWeight: 700, background: C.goldBg, color: C.gold, border: `1px solid rgba(201,162,39,0.4)` }}>{title}</span>
+        <span style={{ fontSize: 15, fontWeight: 700, color: C.white }}>{sub}</span>
       </div>
-      <div style={{ padding: 20, display: "flex", flexDirection: "column", gap: 12 }}>
+      <div style={{ padding: 20, display: "flex", flexDirection: "column", gap: 12, background: "#fff" }}>
         {steps.map(s => (
-          <div key={s.n} style={{ display: "flex", gap: 14, alignItems: "flex-start", padding: "16px 18px", border: "1px solid #e2e8f0", borderRadius: 12, background: "#fff", boxShadow: "0 1px 4px rgba(0,0,0,0.04)" }}>
-            <div style={{ flexShrink: 0, width: 34, height: 34, borderRadius: 9, background: bg, border: `1px solid ${border}`, display: "flex", alignItems: "center", justifyContent: "center", fontSize: 11, fontWeight: 800, color }}>
+          <div key={s.n} style={{ display: "flex", gap: 14, alignItems: "flex-start", padding: "16px 18px", border: `1px solid ${C.border}`, borderRadius: 12, background: "#fff" }}>
+            <div style={{ flexShrink: 0, width: 36, height: 36, borderRadius: "50%", background: C.goldBg, border: `2px solid rgba(201,162,39,0.4)`, display: "flex", alignItems: "center", justifyContent: "center", fontSize: 11, fontWeight: 800, color: C.gold }}>
               {s.n}
             </div>
             <div>
-              <p style={{ fontSize: 14, fontWeight: 700, color: "#0f172a", margin: "0 0 3px" }}>{s.title}</p>
+              <p style={{ fontSize: 14, fontWeight: 700, color: C.navyDeep, margin: "0 0 3px" }}>{s.title}</p>
               <p style={{ fontSize: 13, color: "#64748b", margin: 0, lineHeight: 1.5 }}>{s.desc}</p>
             </div>
           </div>

@@ -116,16 +116,19 @@ export default function DashboardClient({ profile, shifts: initialShifts, applic
   return (
     <div style={{ minHeight: "100vh", background: "#f9fafb" }}>
       {/* Sidebar */}
-      <div style={{ position: "fixed", top: 0, left: 0, bottom: 0, width: 240, background: "#fff", borderRight: "1px solid #e5e7eb", display: "flex", flexDirection: "column", zIndex: 50 }}>
-        <div style={{ padding: "24px 20px", borderBottom: "1px solid #e5e7eb", display: "flex", alignItems: "center", gap: 10 }}>
-          <div style={{ width: 32, height: 32, borderRadius: 8, background: "linear-gradient(135deg,#7c3aed,#4f46e5)", display: "flex", alignItems: "center", justifyContent: "center" }}>
-            <Zap size={15} color="#fff" fill="#fff" />
-          </div>
-          <span style={{ fontSize: 17, fontWeight: 800, color: "#111827" }}>Gig<span style={{ color: "#7c3aed" }}>Shift</span></span>
+      <div style={{ position: "fixed", top: 0, left: 0, bottom: 0, width: 240, background: "#0a1628", borderRight: "1px solid #1e3a5f", display: "flex", flexDirection: "column", zIndex: 50 }}>
+        <div style={{ padding: "24px 20px", borderBottom: "1px solid #1e3a5f", display: "flex", alignItems: "center", gap: 10 }}>
+          <a href="/" style={{ display: "flex", alignItems: "center", gap: 10, textDecoration: "none" }}>
+            <div style={{ width: 32, height: 32, borderRadius: 8, background: "linear-gradient(135deg,#c9a227,#e8c547)", display: "flex", alignItems: "center", justifyContent: "center" }}>
+              <Zap size={15} color="#0a1628" fill="#0a1628" />
+            </div>
+            <span style={{ fontSize: 17, fontWeight: 800, color: "#ffffff" }}>Gig<span style={{ color: "#c9a227" }}>Shift</span></span>
+          </a>
+        </div>
         </div>
         <nav style={{ padding: "16px 12px", flex: 1 }}>
           {[{ icon: Building2, label: "Company Profile", key: "company" }, { icon: Briefcase, label: "Shifts", key: "shifts" }, { icon: Users, label: "Applicants", key: "applicants" }].map(item => (
-            <div key={item.label} onClick={() => setActiveTab(item.key as "company" | "shifts" | "applicants")} style={{ display: "flex", alignItems: "center", gap: 10, padding: "10px 12px", borderRadius: 10, marginBottom: 4, background: activeTab === item.key ? "#f5f3ff" : "transparent", color: activeTab === item.key ? "#7c3aed" : "#6b7280", fontWeight: activeTab === item.key ? 600 : 500, fontSize: 14, cursor: "pointer" }}>
+            <div key={item.label} onClick={() => setActiveTab(item.key as "company" | "shifts" | "applicants")} style={{ display: "flex", alignItems: "center", gap: 10, padding: "10px 12px", borderRadius: 10, marginBottom: 4, background: activeTab === item.key ? "rgba(201,162,39,0.12)" : "transparent", color: activeTab === item.key ? "#c9a227" : "rgba(255,255,255,0.6)", fontWeight: activeTab === item.key ? 600 : 500, fontSize: 14, cursor: "pointer" }}>
               <item.icon size={17} />{item.label}
             </div>
           ))}
@@ -147,7 +150,7 @@ export default function DashboardClient({ profile, shifts: initialShifts, applic
         <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: 32 }}>
           <div>
             <h1 style={{ fontSize: 24, fontWeight: 800, color: "#111827", marginBottom: 4 }}>Welcome back, {profile?.full_name?.split(" ")[0] || "there"} 👋</h1>
-            <p style={{ fontSize: 14, color: "#6b7280" }}>Manage your shifts and applicants</p>
+            <p style={{ fontSize: 14, color: "rgba(255,255,255,0.6)" }}>Manage your shifts and applicants</p>
           </div>
           <button onClick={() => { setShowPostModal(true); setError(""); }} style={{ display: "flex", alignItems: "center", gap: 8, padding: "11px 20px", borderRadius: 10, fontWeight: 700, fontSize: 14, color: "#fff", background: "linear-gradient(135deg,#7c3aed,#4f46e5)", border: "none", cursor: "pointer", boxShadow: "0 4px 16px rgba(124,58,237,0.3)" }}>
             <Plus size={16} /> Post a Shift
@@ -159,7 +162,7 @@ export default function DashboardClient({ profile, shifts: initialShifts, applic
           {stats.map(s => (
             <div key={s.label} style={{ background: "#fff", border: "1px solid #e5e7eb", borderRadius: 16, padding: "20px", boxShadow: "0 1px 6px rgba(0,0,0,0.04)" }}>
               <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: 12 }}>
-                <p style={{ fontSize: 13, color: "#6b7280", fontWeight: 500 }}>{s.label}</p>
+                <p style={{ fontSize: 13, color: "rgba(255,255,255,0.6)", fontWeight: 500 }}>{s.label}</p>
                 <div style={{ width: 36, height: 36, borderRadius: 10, background: s.bg, display: "flex", alignItems: "center", justifyContent: "center" }}>
                   <s.icon size={17} color={s.color} />
                 </div>
@@ -186,7 +189,7 @@ export default function DashboardClient({ profile, shifts: initialShifts, applic
               <thead>
                 <tr style={{ background: "#f9fafb" }}>
                   {["Role", "Location", "Date", "Pay Rate", "Spots", "Applicants", "Status", "Actions"].map(h => (
-                    <th key={h} style={{ padding: "12px 16px", textAlign: "left", fontSize: 12, fontWeight: 600, color: "#6b7280", textTransform: "uppercase", letterSpacing: "0.05em", borderBottom: "1px solid #e5e7eb" }}>{h}</th>
+                    <th key={h} style={{ padding: "12px 16px", textAlign: "left", fontSize: 12, fontWeight: 600, color: "rgba(255,255,255,0.6)", textTransform: "uppercase", letterSpacing: "0.05em", borderBottom: "1px solid #e5e7eb" }}>{h}</th>
                   ))}
                 </tr>
               </thead>
@@ -194,11 +197,11 @@ export default function DashboardClient({ profile, shifts: initialShifts, applic
                 {shifts.map((s, i) => (
                   <tr key={s.id} style={{ borderBottom: i < shifts.length - 1 ? "1px solid #f3f4f6" : "none" }}>
                     <td style={{ padding: "14px 16px", fontSize: 14, fontWeight: 600, color: "#111827" }}>{s.title}</td>
-                    <td style={{ padding: "14px 16px", fontSize: 14, color: "#6b7280" }}>{s.location}</td>
-                    <td style={{ padding: "14px 16px", fontSize: 14, color: "#6b7280" }}>{new Date(s.shift_date).toLocaleDateString()}</td>
+                    <td style={{ padding: "14px 16px", fontSize: 14, color: "rgba(255,255,255,0.6)" }}>{s.location}</td>
+                    <td style={{ padding: "14px 16px", fontSize: 14, color: "rgba(255,255,255,0.6)" }}>{new Date(s.shift_date).toLocaleDateString()}</td>
                     <td style={{ padding: "14px 16px", fontSize: 14, fontWeight: 600, color: "#7c3aed" }}>${s.pay_rate}/hr</td>
-                    <td style={{ padding: "14px 16px", fontSize: 14, color: "#6b7280" }}>{s.spots}</td>
-                    <td style={{ padding: "14px 16px", fontSize: 14, color: "#6b7280" }}>{s.applications?.[0]?.count ?? 0}</td>
+                    <td style={{ padding: "14px 16px", fontSize: 14, color: "rgba(255,255,255,0.6)" }}>{s.spots}</td>
+                    <td style={{ padding: "14px 16px", fontSize: 14, color: "rgba(255,255,255,0.6)" }}>{s.applications?.[0]?.count ?? 0}</td>
                     <td style={{ padding: "14px 16px" }}>
                       <span style={{ padding: "4px 10px", borderRadius: 6, fontSize: 12, fontWeight: 600, background: statusColor[s.status]?.bg, color: statusColor[s.status]?.color }}>
                         {s.status.charAt(0).toUpperCase() + s.status.slice(1)}
@@ -207,7 +210,7 @@ export default function DashboardClient({ profile, shifts: initialShifts, applic
                     <td style={{ padding: "14px 16px" }}>
                       <div style={{ display: "flex", gap: 6 }}>
                         <button onClick={() => setViewShift(s)} title="View" style={{ padding: "6px", borderRadius: 7, border: "1px solid #e5e7eb", background: "#f9fafb", cursor: "pointer", display: "flex", alignItems: "center" }}>
-                          <Eye size={14} color="#6b7280" />
+                          <Eye size={14} color="rgba(255,255,255,0.6)" />
                         </button>
                         <button onClick={() => { setEditShift(s); setError(""); }} title="Edit" style={{ padding: "6px", borderRadius: 7, border: "1px solid #e5e7eb", background: "#f9fafb", cursor: "pointer", display: "flex", alignItems: "center" }}>
                           <Pencil size={14} color="#4f46e5" />
@@ -231,7 +234,7 @@ export default function DashboardClient({ profile, shifts: initialShifts, applic
         <div>
           <div style={{ marginBottom: 28 }}>
             <h1 style={{ fontSize: 24, fontWeight: 800, color: "#111827", marginBottom: 4 }}>Applicants</h1>
-            <p style={{ fontSize: 14, color: "#6b7280" }}>Workers who applied to your shifts</p>
+            <p style={{ fontSize: 14, color: "rgba(255,255,255,0.6)" }}>Workers who applied to your shifts</p>
           </div>
           <div style={{ background: "#fff", border: "1px solid #e5e7eb", borderRadius: 16, overflow: "hidden", boxShadow: "0 1px 6px rgba(0,0,0,0.04)" }}>
             {applications.length === 0 ? (
@@ -245,7 +248,7 @@ export default function DashboardClient({ profile, shifts: initialShifts, applic
                 <thead>
                   <tr style={{ background: "#f9fafb" }}>
                     {["Worker", "Shift", "Date", "Time", "Location", "Applied", "Status", "Action"].map(h => (
-                      <th key={h} style={{ padding: "12px 16px", textAlign: "left", fontSize: 12, fontWeight: 600, color: "#6b7280", textTransform: "uppercase", letterSpacing: "0.05em", borderBottom: "1px solid #e5e7eb" }}>{h}</th>
+                      <th key={h} style={{ padding: "12px 16px", textAlign: "left", fontSize: 12, fontWeight: 600, color: "rgba(255,255,255,0.6)", textTransform: "uppercase", letterSpacing: "0.05em", borderBottom: "1px solid #e5e7eb" }}>{h}</th>
                     ))}
                   </tr>
                 </thead>
@@ -261,9 +264,9 @@ export default function DashboardClient({ profile, shifts: initialShifts, applic
                         </div>
                       </td>
                       <td style={{ padding: "14px 16px", fontSize: 14, fontWeight: 600, color: "#111827" }}>{a.shift?.title ?? "—"}</td>
-                      <td style={{ padding: "14px 16px", fontSize: 14, color: "#6b7280" }}>{a.shift?.shift_date ? new Date(a.shift.shift_date).toLocaleDateString() : "—"}</td>
-                      <td style={{ padding: "14px 16px", fontSize: 14, color: "#6b7280" }}>{a.shift ? `${a.shift.start_time} – ${a.shift.end_time}` : "—"}</td>
-                      <td style={{ padding: "14px 16px", fontSize: 14, color: "#6b7280" }}>{a.shift?.location ?? "—"}</td>
+                      <td style={{ padding: "14px 16px", fontSize: 14, color: "rgba(255,255,255,0.6)" }}>{a.shift?.shift_date ? new Date(a.shift.shift_date).toLocaleDateString() : "—"}</td>
+                      <td style={{ padding: "14px 16px", fontSize: 14, color: "rgba(255,255,255,0.6)" }}>{a.shift ? `${a.shift.start_time} – ${a.shift.end_time}` : "—"}</td>
+                      <td style={{ padding: "14px 16px", fontSize: 14, color: "rgba(255,255,255,0.6)" }}>{a.shift?.location ?? "—"}</td>
                       <td style={{ padding: "14px 16px", fontSize: 13, color: "#9ca3af" }}>{new Date(a.created_at).toLocaleDateString()}</td>
                       <td style={{ padding: "14px 16px" }}>
                         {(() => {
@@ -326,7 +329,7 @@ export default function DashboardClient({ profile, shifts: initialShifts, applic
               ...(viewShift.description ? [["Description", viewShift.description]] : []),
             ].map(([label, value]) => (
               <div key={label} style={{ display: "flex", gap: 12 }}>
-                <span style={{ fontSize: 13, fontWeight: 600, color: "#6b7280", minWidth: 90 }}>{label}</span>
+                <span style={{ fontSize: 13, fontWeight: 600, color: "rgba(255,255,255,0.6)", minWidth: 90 }}>{label}</span>
                 <span style={{ fontSize: 14, color: "#111827" }}>{value}</span>
               </div>
             ))}
@@ -728,7 +731,7 @@ function EmployerSidebarProfile({ profile }: { profile: Profile }) {
                 </div>
                 <div style={{ minWidth: 0 }}>
                   <p style={{ fontSize: 13, fontWeight: 700, color: "#111827", margin: 0, whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis" }}>{profile?.full_name || "Employer"}</p>
-                  <p style={{ fontSize: 11, color: "#6b7280", margin: "2px 0 0", whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis" }}>{email ?? "Loading..."}</p>
+                  <p style={{ fontSize: 11, color: "rgba(255,255,255,0.6)", margin: "2px 0 0", whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis" }}>{email ?? "Loading..."}</p>
                 </div>
               </div>
               {profile?.company_name && (

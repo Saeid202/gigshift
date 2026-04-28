@@ -167,18 +167,18 @@ export default function WorkerDashboardClient({
     <div style={{ minHeight: "100vh", background: "#f8fafc", display: "flex" }}>
 
       {/* Sidebar */}
-      <div style={{ position: "fixed", top: 0, left: 0, bottom: 0, width: 240, background: "#fff", borderRight: "1px solid #e2e8f0", display: "flex", flexDirection: "column", zIndex: 50 }}>
-        <div style={{ padding: "24px 20px", borderBottom: "1px solid #e2e8f0", display: "flex", alignItems: "center", gap: 10 }}>
+      <div style={{ position: "fixed", top: 0, left: 0, bottom: 0, width: 240, background: "#0a1628", borderRight: "1px solid #1e3a5f", display: "flex", flexDirection: "column", zIndex: 50 }}>
+        <div style={{ padding: "24px 20px", borderBottom: "1px solid #1e3a5f", display: "flex", alignItems: "center", gap: 10 }}>
           <a href="/" style={{ display: "flex", alignItems: "center", gap: 10, textDecoration: "none" }}>
-            <div style={{ width: 32, height: 32, borderRadius: 8, background: "linear-gradient(135deg,#2563eb,#7c3aed)", display: "flex", alignItems: "center", justifyContent: "center" }}>
-              <Zap size={15} color="#fff" fill="#fff" />
+            <div style={{ width: 32, height: 32, borderRadius: 8, background: "linear-gradient(135deg,#c9a227,#e8c547)", display: "flex", alignItems: "center", justifyContent: "center" }}>
+              <Zap size={15} color="#0a1628" fill="#0a1628" />
             </div>
-            <span style={{ fontSize: 17, fontWeight: 800, color: "#0f172a" }}>Gig<span style={{ color: "#2563eb" }}>Shift</span></span>
+            <span style={{ fontSize: 17, fontWeight: 800, color: "#ffffff" }}>Gig<span style={{ color: "#c9a227" }}>Shift</span></span>
           </a>
         </div>
         <nav style={{ padding: "16px 12px", flex: 1 }}>
           {navItems.map(item => (
-            <div key={item.key} onClick={() => setTab(item.key)} style={{ display: "flex", alignItems: "center", gap: 10, padding: "10px 12px", borderRadius: 10, marginBottom: 4, background: tab === item.key ? "#eff6ff" : "transparent", color: tab === item.key ? PRIMARY : "#6b7280", fontWeight: tab === item.key ? 600 : 500, fontSize: 14, cursor: "pointer", borderLeft: tab === item.key ? `3px solid ${PRIMARY}` : "3px solid transparent" }}>
+            <div key={item.key} onClick={() => setTab(item.key)} style={{ display: "flex", alignItems: "center", gap: 10, padding: "10px 12px", borderRadius: 10, marginBottom: 4, background: tab === item.key ? "rgba(201,162,39,0.12)" : "transparent", color: tab === item.key ? "#c9a227" : "rgba(255,255,255,0.6)", fontWeight: tab === item.key ? 600 : 500, fontSize: 14, cursor: "pointer", borderLeft: tab === item.key ? "3px solid #c9a227" : "3px solid transparent" }}>
               <item.icon size={17} />{item.label}
             </div>
           ))}
@@ -193,7 +193,7 @@ export default function WorkerDashboardClient({
         {tab === "profile" && (
           <div style={{ maxWidth: 600 }}>
             <h1 style={{ fontSize: 24, fontWeight: 800, color: "#0f172a", marginBottom: 24 }}>Profile</h1>
-            <div style={{ background: "#fff", border: "1px solid #e2e8f0", borderRadius: 16, padding: "24px", marginBottom: 16, display: "flex", alignItems: "center", gap: 20, boxShadow: "0 1px 8px rgba(0,0,0,0.06)" }}>
+            <div style={{ background: "#fff", border: "1px solid #1e3a5f", borderRadius: 16, padding: "24px", marginBottom: 16, display: "flex", alignItems: "center", gap: 20, boxShadow: "0 1px 8px rgba(0,0,0,0.06)" }}>
               <div style={{ width: 64, height: 64, borderRadius: "50%", background: "linear-gradient(135deg,#2563eb,#1d4ed8,#1e40af)", display: "flex", alignItems: "center", justifyContent: "center", fontSize: 24, fontWeight: 800, color: "#fff" }}>
                 {profile?.full_name?.charAt(0).toUpperCase() ?? "W"}
               </div>
@@ -203,7 +203,7 @@ export default function WorkerDashboardClient({
                 {profile?.phone && <p style={{ fontSize: 13, color: "#64748b" }}>{profile.phone}</p>}
               </div>
             </div>
-            <div style={{ background: "#fff", border: "1px solid #e2e8f0", borderRadius: 16, overflow: "hidden", boxShadow: "0 1px 8px rgba(0,0,0,0.06)" }}>
+            <div style={{ background: "#fff", border: "1px solid #1e3a5f", borderRadius: 16, overflow: "hidden", boxShadow: "0 1px 8px rgba(0,0,0,0.06)" }}>
               {profileMenuItems.map((item, i, arr) => (
                 <div key={item.label} onClick={() => setDrawer(item.key)} style={{ display: "flex", alignItems: "center", justifyContent: "space-between", padding: "16px 20px", cursor: "pointer", borderBottom: i < arr.length - 1 ? "1px solid #f3f4f6" : "none" }}
                   onMouseEnter={e => (e.currentTarget.style.background = "#f9fafb")}
@@ -224,7 +224,7 @@ export default function WorkerDashboardClient({
         {tab === "available" && (
           <div>
             {/* Vibrant welcome banner */}
-            <div style={{ background: GRADIENT, borderRadius: 20, padding: "28px 32px", marginBottom: 28, position: "relative", overflow: "hidden" }}>
+            <div style={{ background: "linear-gradient(135deg, #0a1628 0%, #1a3a6b 100%)", borderRadius: 20, padding: "28px 32px", marginBottom: 28, position: "relative", overflow: "hidden" }}>
               <div style={{ position: "absolute", top: -30, right: -30, width: 140, height: 140, borderRadius: "50%", background: "rgba(255,255,255,0.08)" }} />
               <div style={{ position: "absolute", bottom: -20, right: 60, width: 80, height: 80, borderRadius: "50%", background: "rgba(124,58,237,0.3)" }} />
               <div style={{ position: "absolute", inset: 0, opacity: 0.04, backgroundImage: "radial-gradient(circle, white 1px, transparent 1px)", backgroundSize: "32px 32px" }} />
@@ -234,10 +234,10 @@ export default function WorkerDashboardClient({
             </div>
             <div style={{ position: "relative", maxWidth: 420, marginBottom: 24 }}>
               <Search size={15} color="#9ca3af" style={{ position: "absolute", left: 12, top: "50%", transform: "translateY(-50%)" }} />
-              <input value={search} onChange={e => setSearch(e.target.value)} placeholder="Search jobs, location, company..." style={{ width: "100%", padding: "10px 14px 10px 36px", borderRadius: 10, border: "1px solid #e2e8f0", fontSize: 14, color: "#0f172a", outline: "none", boxSizing: "border-box", background: "#fff" }} />
+              <input value={search} onChange={e => setSearch(e.target.value)} placeholder="Search jobs, location, company..." style={{ width: "100%", padding: "10px 14px 10px 36px", borderRadius: 10, border: "1px solid #1e3a5f", fontSize: 14, color: "#0f172a", outline: "none", boxSizing: "border-box", background: "#fff" }} />
             </div>
             {filtered.length === 0 ? (
-              <div style={{ background: "#fff", border: "1px solid #e2e8f0", borderRadius: 16, padding: "60px 24px", textAlign: "center" }}>
+              <div style={{ background: "#fff", border: "1px solid #1e3a5f", borderRadius: 16, padding: "60px 24px", textAlign: "center" }}>
                 <Briefcase size={40} color="#d1d5db" style={{ margin: "0 auto 12px" }} />
                 <p style={{ fontWeight: 600, color: "#1e293b", marginBottom: 4 }}>No jobs available</p>
                 <p style={{ fontSize: 13, color: "#94a3b8" }}>Check back soon for new shifts</p>
@@ -265,7 +265,7 @@ export default function WorkerDashboardClient({
                     <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", marginBottom: 12 }}>
                       <div>
                         <p style={{ fontSize: 15, fontWeight: 700, color: "#0f172a", marginBottom: 3 }}>{shift.title}</p>
-                        <p style={{ fontSize: 13, color: PRIMARY, fontWeight: 600 }}>{shift.employer?.company_name || shift.employer?.full_name || "Company"}</p>
+                        <p style={{ fontSize: 13, color: "#c9a227", fontWeight: 600 }}>{shift.employer?.company_name || shift.employer?.full_name || "Company"}</p>
                       </div>
                       <div style={{ display: "flex", flexDirection: "column", alignItems: "flex-end", gap: 6 }}>
                         <span style={{ fontSize: 15, fontWeight: 800, color: PRIMARY }}>${shift.pay_rate}/hr</span>
@@ -289,7 +289,7 @@ export default function WorkerDashboardClient({
         {tab === "account" && (
           <div style={{ maxWidth: 600 }}>
             <h1 style={{ fontSize: 24, fontWeight: 800, color: "#0f172a", marginBottom: 24 }}>Account</h1>
-            <div style={{ background: "#fff", border: "1px solid #e2e8f0", borderRadius: 16, padding: "24px", marginBottom: 16, display: "flex", alignItems: "center", gap: 20, boxShadow: "0 1px 8px rgba(0,0,0,0.06)" }}>
+            <div style={{ background: "#fff", border: "1px solid #1e3a5f", borderRadius: 16, padding: "24px", marginBottom: 16, display: "flex", alignItems: "center", gap: 20, boxShadow: "0 1px 8px rgba(0,0,0,0.06)" }}>
               <div style={{ width: 64, height: 64, borderRadius: "50%", background: "linear-gradient(135deg,#2563eb,#1d4ed8,#1e40af)", display: "flex", alignItems: "center", justifyContent: "center", fontSize: 24, fontWeight: 800, color: "#fff" }}>
                 {profile?.full_name?.charAt(0).toUpperCase() ?? "W"}
               </div>
@@ -298,7 +298,7 @@ export default function WorkerDashboardClient({
                 <span style={{ fontSize: 12, fontWeight: 600, padding: "3px 10px", borderRadius: 6, background: "#eff6ff", color: PRIMARY }}>Worker</span>
               </div>
             </div>
-            <div style={{ background: "#fff", border: "1px solid #e2e8f0", borderRadius: 16, overflow: "hidden", boxShadow: "0 1px 8px rgba(0,0,0,0.06)" }}>
+            <div style={{ background: "#fff", border: "1px solid #1e3a5f", borderRadius: 16, overflow: "hidden", boxShadow: "0 1px 8px rgba(0,0,0,0.06)" }}>
               {profileMenuItems.map((item, i, arr) => (
                 <div key={item.label} onClick={() => { setTab("profile"); setDrawer(item.key); }} style={{ display: "flex", alignItems: "center", justifyContent: "space-between", padding: "16px 20px", cursor: "pointer", borderBottom: i < arr.length - 1 ? "1px solid #f3f4f6" : "none" }}
                   onMouseEnter={e => (e.currentTarget.style.background = "#f9fafb")}
@@ -326,7 +326,7 @@ export default function WorkerDashboardClient({
         <div style={{ position: "fixed", inset: 0, zIndex: 300, display: "flex" }}>
           <div style={{ flex: 1, background: "rgba(0,0,0,0.4)" }} onClick={() => setDrawer(null)} />
           <div style={{ width: 480, background: "#fff", height: "100%", overflowY: "auto", boxShadow: "-8px 0 40px rgba(0,0,0,0.15)", display: "flex", flexDirection: "column" }}>
-            <div style={{ padding: "24px 28px", borderBottom: "1px solid #e2e8f0", display: "flex", alignItems: "center", justifyContent: "space-between" }}>
+            <div style={{ padding: "24px 28px", borderBottom: "1px solid #1e3a5f", display: "flex", alignItems: "center", justifyContent: "space-between" }}>
               <h2 style={{ fontSize: 18, fontWeight: 800, color: "#0f172a" }}>
                 {drawer === "editProfile" ? "Edit Profile" : drawer === "workExp" ? "Work Experience" : drawer === "payroll" ? "Payroll Information" : "Timekeeping"}
               </h2>
@@ -458,7 +458,7 @@ function EmptyState({ title, subtitle, onBrowse }: { title: string; subtitle: st
   return (
     <div>
       <h1 style={{ fontSize: 24, fontWeight: 800, color: "#0f172a", marginBottom: 24 }}>{title}</h1>
-      <div style={{ background: "#fff", border: "1px solid #e2e8f0", borderRadius: 16, padding: "60px 24px", textAlign: "center", boxShadow: "0 1px 8px rgba(0,0,0,0.06)" }}>
+      <div style={{ background: "#fff", border: "1px solid #1e3a5f", borderRadius: 16, padding: "60px 24px", textAlign: "center", boxShadow: "0 1px 8px rgba(0,0,0,0.06)" }}>
         <Briefcase size={40} color="#d1d5db" style={{ margin: "0 auto 12px" }} />
         <p style={{ fontWeight: 700, color: "#1e293b", marginBottom: 6 }}>{title}</p>
         <p style={{ fontSize: 13, color: "#94a3b8", marginBottom: onBrowse ? 20 : 0 }}>{subtitle}</p>
@@ -582,7 +582,7 @@ function WorkSkillsForm({ initial, saving, onSave }: { initial: WorkExp; saving:
                   <div style={{ width: 44, height: 44, borderRadius: 12, background: "#eff6ff", display: "flex", alignItems: "center", justifyContent: "center" }}>
                     {uploadingLicense ? <span style={{ fontSize: 12, color: PRIMARY }}>...</span> : <span style={{ fontSize: 22 }}>📄</span>}
                   </div>
-                  <span style={{ fontSize: 13, color: PRIMARY, fontWeight: 600 }}>{uploadingLicense ? "Uploading..." : "Tap to upload"}</span>
+                  <span style={{ fontSize: 13, color: "#c9a227", fontWeight: 600 }}>{uploadingLicense ? "Uploading..." : "Tap to upload"}</span>
                   <span style={{ fontSize: 11, color: "#94a3b8" }}>JPG, PNG or PDF</span>
                   <input type="file" accept="image/*,.pdf" onChange={handleLicenseUpload} style={{ display: "none" }} disabled={uploadingLicense} />
                 </label>
@@ -637,12 +637,12 @@ function SidebarProfile({ profile }: { profile: Profile }) {
   const GRAD = "linear-gradient(135deg,#2563eb,#7c3aed)";
 
   return (
-    <div style={{ padding: "12px", borderTop: "1px solid #e2e8f0", position: "relative" }}>
+    <div style={{ padding: "12px", borderTop: "1px solid #1e3a5f", position: "relative" }}>
       {/* Popover */}
       {open && (
         <>
           <div style={{ position: "fixed", inset: 0, zIndex: 99 }} onClick={() => setOpen(false)} />
-          <div style={{ position: "absolute", bottom: "calc(100% + 8px)", left: 12, right: 12, background: "#fff", borderRadius: 16, boxShadow: "0 8px 32px rgba(0,0,0,0.14)", border: "1px solid #e2e8f0", zIndex: 100, overflow: "hidden" }}>
+          <div style={{ position: "absolute", bottom: "calc(100% + 8px)", left: 12, right: 12, background: "#fff", borderRadius: 16, boxShadow: "0 8px 32px rgba(0,0,0,0.14)", border: "1px solid #1e3a5f", zIndex: 100, overflow: "hidden" }}>
             {/* User info */}
             <div style={{ padding: "16px 16px 12px", borderBottom: "1px solid #f1f5f9" }}>
               <div style={{ display: "flex", alignItems: "center", gap: 10, marginBottom: 8 }}>
@@ -697,14 +697,14 @@ function ShiftCard({ shift, formatDate, formatTime, onSelect, applied }: { shift
       onMouseEnter={e => { e.currentTarget.style.boxShadow = "0 6px 20px rgba(37,99,235,0.12)"; e.currentTarget.style.borderColor = "#bfdbfe"; }}
       onMouseLeave={e => { e.currentTarget.style.boxShadow = "0 1px 8px rgba(0,0,0,0.06)"; e.currentTarget.style.borderColor = applied ? "#ddd6fe" : "#e2e8f0"; }}
     >
-      <div style={{ position: "absolute", top: 0, left: 0, right: 0, height: 3, background: GRADIENT }} />
+      <div style={{ position: "absolute", top: 0, left: 0, right: 0, height: 3, background: "linear-gradient(135deg, #0a1628, #1a3a6b)" }} />
       {applied && <span style={{ position: "absolute", top: 14, right: 14, fontSize: 11, fontWeight: 700, padding: "3px 8px", borderRadius: 6, background: "#f5f3ff", color: "#7c3aed", border: "1px solid #ddd6fe" }}>Applied ✓</span>}
       <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", marginBottom: 12, marginTop: 6 }}>
         <div>
           <p style={{ fontSize: 15, fontWeight: 700, color: "#0f172a", marginBottom: 3 }}>{shift.title}</p>
-          <p style={{ fontSize: 13, color: PRIMARY, fontWeight: 600 }}>{shift.employer?.company_name || shift.employer?.full_name || "Company"}</p>
+          <p style={{ fontSize: 13, color: "#c9a227", fontWeight: 600 }}>{shift.employer?.company_name || shift.employer?.full_name || "Company"}</p>
         </div>
-        <span style={{ fontSize: 16, fontWeight: 900, color: ACCENT, marginRight: applied ? 60 : 0 }}>${shift.pay_rate}/hr</span>
+        <span style={{ fontSize: 16, fontWeight: 900, color: "#c9a227", marginRight: applied ? 60 : 0 }}>${shift.pay_rate}/hr</span>
       </div>
       <div style={{ display: "flex", flexWrap: "wrap", gap: 8 }}>
         <Pill icon={MapPin} text={shift.location} />
@@ -725,7 +725,7 @@ function ShiftDetailModal({ shift, formatDate, formatTime, applied, onAccept, on
           <h2 style={{ fontSize: 20, fontWeight: 800, color: "#0f172a" }}>{shift.title}</h2>
           <button onClick={onClose} style={{ background: "none", border: "none", cursor: "pointer", color: "#94a3b8", fontSize: 20 }}>✕</button>
         </div>
-        <p style={{ fontSize: 14, color: PRIMARY, fontWeight: 600, marginBottom: 24 }}>{shift.employer?.company_name || shift.employer?.full_name || "Company"}</p>
+        <p style={{ fontSize: 14, color: "#c9a227", fontWeight: 600, marginBottom: 24 }}>{shift.employer?.company_name || shift.employer?.full_name || "Company"}</p>
         <div style={{ display: "flex", flexDirection: "column", gap: 14, marginBottom: 24 }}>
           {[
             { icon: MapPin, label: "Location", value: shift.location },

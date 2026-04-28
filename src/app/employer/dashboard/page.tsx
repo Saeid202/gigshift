@@ -2,6 +2,13 @@ import { createClient } from "@/lib/supabase/server";
 import { redirect } from "next/navigation";
 import DashboardClient from "./DashboardClient";
 
+type Application = {
+  id: string; status: string; created_at: string;
+  worker_id: string;
+  worker: { id: string; full_name: string } | null;
+  shift: { title: string; shift_date: string; start_time: string; end_time: string; location: string } | null;
+};
+
 export default async function EmployerDashboard() {
   const supabase = await createClient();
 
@@ -38,7 +45,7 @@ export default async function EmployerDashboard() {
 
   const workerMap = Object.fromEntries((workers ?? []).map((w: {id: string; full_name: string}) => [w.id, w]));
 
-  const applicationsWithWorkers = (applications ?? []).map((a: {worker_id: string}) => ({
+  const applicationsWithWorkers = (applications ?? []).map((a: {worker_id: string; id: string; status: string; created_at: string; shift: Application["shift"]}) => ({
     ...a,
     worker: workerMap[a.worker_id] ?? null,
   }));

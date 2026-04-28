@@ -3,12 +3,13 @@ import { useState } from "react";
 import { Building2, User, X, Zap, Eye, EyeOff } from "lucide-react";
 import { signUp, signIn } from "@/app/actions";
 
-const BRAND = "#2563eb";
-const GRADIENT = "linear-gradient(135deg, #2563eb 0%, #7c3aed 100%)";
-const TEXT = "#0f172a";
+const BRAND = "#1e5bb5";
+const GRADIENT = "linear-gradient(135deg, #c9a227 0%, #e8c547 100%)";
+const TEXT = "#0a1628";
 const TEXT_MUTED = "#64748b";
 const BORDER = "#e2e8f0";
 const WHITE = "#ffffff";
+const NAVY = "#0a1628";
 
 type Tab = "signup" | "signin";
 type Role = "employer" | "worker";
@@ -56,7 +57,9 @@ export default function AuthModal({ defaultTab = "signup", defaultRole, onClose 
 
   return (
     <div onClick={onClose} style={{ position: "fixed", inset: 0, zIndex: 1000, background: "rgba(15,23,42,0.6)", backdropFilter: "blur(6px)", display: "flex", alignItems: "center", justifyContent: "center", padding: 16 }}>
-      <div onClick={e => e.stopPropagation()} style={{ background: WHITE, borderRadius: 24, width: "100%", maxWidth: 460, boxShadow: "0 24px 80px rgba(0,0,0,0.2)", position: "relative" }}>
+      <div onClick={e => e.stopPropagation()} style={{ background: WHITE, borderRadius: 24, width: "100%", maxWidth: 460, boxShadow: "0 24px 80px rgba(0,0,0,0.3)", position: "relative", overflow: "hidden" }}>
+        {/* Navy header accent */}
+        <div style={{ position: "absolute", top: 0, left: 0, right: 0, height: 3, background: "linear-gradient(135deg, #c9a227 0%, #e8c547 100%)" }} />
 
         {/* Close */}
         <button onClick={onClose} style={{ position: "absolute", top: 16, right: 16, background: "#f1f5f9", border: "none", borderRadius: 8, width: 32, height: 32, cursor: "pointer", display: "flex", alignItems: "center", justifyContent: "center", color: TEXT_MUTED, zIndex: 1 }}>
