@@ -129,7 +129,7 @@ export default function WorkerDashboardClient({
     const fd = new FormData(e.currentTarget);
     const { data: { user } } = await supabase.auth.getUser();
     if (user) {
-      const data = { worker_id: user.id, bank_name: fd.get("bank_name"), account_number: fd.get("account_number"), transit_number: fd.get("transit_number"), institution_number: fd.get("institution_number"), sin: fd.get("sin") };
+      const data = { worker_id: user.id, bank_name: fd.get("bank_name") as string || undefined, account_number: fd.get("account_number") as string || undefined, transit_number: fd.get("transit_number") as string || undefined, institution_number: fd.get("institution_number") as string || undefined, sin: fd.get("sin") as string || undefined };
       await supabase.from("payroll_info").upsert(data, { onConflict: "worker_id" });
       setPayroll(data);
     }
