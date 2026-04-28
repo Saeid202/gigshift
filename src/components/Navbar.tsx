@@ -12,6 +12,14 @@ export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [authModal, setAuthModal] = useState<AuthTab | null>(null);
   const [authRole, setAuthRole] = useState<AuthRole | null>(null);
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const check = () => setIsMobile(window.innerWidth < 768);
+    check();
+    window.addEventListener("resize", check);
+    return () => window.removeEventListener("resize", check);
+  }, []);
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 60);
@@ -56,7 +64,7 @@ export default function Navbar() {
           </a>
 
           {/* Desktop nav */}
-          <div style={{ display: "flex", alignItems: "center", gap: 32 }} className="hidden md:flex">
+          <div style={{ display: isMobile ? "none" : "flex", alignItems: "center", gap: 32 }}>
             {["Features", "How it Works"].map(label => (
               <NavLink key={label} href={`#${label.toLowerCase().replace(/ /g, "-")}`} label={label} />
             ))}
@@ -65,29 +73,30 @@ export default function Navbar() {
           </div>
 
           {/* Desktop CTA */}
-          <div style={{ display: "flex", alignItems: "center", gap: 10 }} className="hidden md:flex">
+          <div style={{ display: isMobile ? "none" : "flex", alignItems: "center", gap: 10 }}>
             <SignInBtn onClick={() => openModal("signin")} />
             <GetStartedBtn onClick={() => openModal("signup")} />
           </div>
 
           {/* Hamburger — mobile only */}
-          <button
-            onClick={() => setOpen(!open)}
-            aria-label={open ? "Close menu" : "Open menu"}
-            style={{
-              background: "none", border: "none", color: C.white,
-              cursor: "pointer", padding: 6, borderRadius: 8,
-              display: "flex", alignItems: "center", justifyContent: "center",
-            }}
-            className="md:hidden"
-          >
-            {open ? <X size={24} /> : <Menu size={24} />}
-          </button>
+          {isMobile && (
+            <button
+              onClick={() => setOpen(!open)}
+              aria-label={open ? "Close menu" : "Open menu"}
+              style={{
+                background: "none", border: "none", color: C.white,
+                cursor: "pointer", padding: 6, borderRadius: 8,
+                display: "flex", alignItems: "center", justifyContent: "center",
+              }}
+            >
+              {open ? <X size={24} /> : <Menu size={24} />}
+            </button>
+          )}
         </div>
       </nav>
 
       {/* Mobile drawer overlay */}
-      {open && (
+      {isMobile && open && (
         <div
           onClick={() => setOpen(false)}
           style={{
@@ -98,19 +107,19 @@ export default function Navbar() {
       )}
 
       {/* Mobile drawer panel */}
-      <div
-        style={{
-          position: "fixed", top: 0, right: 0, bottom: 0, zIndex: 200,
-          width: 280,
-          background: C.navyDeep,
-          borderLeft: `1px solid ${C.navyBorder}`,
-          display: "flex", flexDirection: "column",
-          transform: open ? "translateX(0)" : "translateX(100%)",
-          transition: "transform 0.3s cubic-bezier(0.4,0,0.2,1)",
-          boxShadow: open ? "-8px 0 40px rgba(0,0,0,0.5)" : "none",
-        }}
-        className="md:hidden"
-      >
+      {isMobile && (
+        <div
+          style={{
+            position: "fixed", top: 0, right: 0, bottom: 0, zIndex: 200,
+            width: 280,
+            background: C.navyDeep,
+            borderLeft: `1px solid ${C.navyBorder}`,
+            display: "flex", flexDirection: "column",
+            transform: open ? "translateX(0)" : "translateX(100%)",
+            transition: "transform 0.3s cubic-bezier(0.4,0,0.2,1)",
+            boxShadow: open ? "-8px 0 40px rgba(0,0,0,0.5)" : "none",
+          }}
+        >
         {/* Drawer header */}
         <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", padding: "20px 20px 16px", borderBottom: `1px solid ${C.navyBorder}` }}>
           <a href="/" onClick={() => setOpen(false)} style={{ display: "flex", alignItems: "center", gap: 8, textDecoration: "none" }}>
