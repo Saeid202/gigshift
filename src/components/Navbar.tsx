@@ -1,6 +1,6 @@
 "use client";
 import { useState, useEffect } from "react";
-import { Zap, Menu, X } from "lucide-react";
+import { Zap, Menu, X, LayoutDashboard, LogIn, UserPlus } from "lucide-react";
 import AuthModal from "./AuthModal";
 import { C } from "@/lib/design";
 
@@ -20,6 +20,12 @@ export default function Navbar() {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
+  // Lock body scroll when drawer open
+  useEffect(() => {
+    document.body.style.overflow = open ? "hidden" : "";
+    return () => { document.body.style.overflow = ""; };
+  }, [open]);
+
   function openModal(tab: AuthTab, role?: AuthRole) {
     setAuthModal(tab); setAuthRole(role ?? null); setOpen(false);
   }
@@ -35,7 +41,7 @@ export default function Navbar() {
         transition: "all 0.3s ease",
         padding: "0 32px",
       }}>
-        {/* Gold accent line at bottom */}
+        {/* Gold accent line */}
         <div style={{ position: "absolute", bottom: 0, left: 0, right: 0, height: 2, background: C.goldGrad, opacity: scrolled ? 1 : 0.6, transition: "opacity 0.3s" }} />
 
         <div style={{ maxWidth: 1200, margin: "0 auto", height: 68, display: "flex", alignItems: "center", justifyContent: "space-between" }}>
@@ -58,34 +64,123 @@ export default function Navbar() {
             <button onClick={() => openModal("signup", "worker")} style={navBtnStyle} onMouseEnter={e => { e.currentTarget.style.color = C.gold; e.currentTarget.style.borderBottomColor = C.gold; }} onMouseLeave={e => { e.currentTarget.style.color = "rgba(255,255,255,0.8)"; e.currentTarget.style.borderBottomColor = "transparent"; }}>For Workers</button>
           </div>
 
-          {/* CTA */}
+          {/* Desktop CTA */}
           <div style={{ display: "flex", alignItems: "center", gap: 10 }} className="hidden md:flex">
             <SignInBtn onClick={() => openModal("signin")} />
             <GetStartedBtn onClick={() => openModal("signup")} />
           </div>
 
-          <button onClick={() => setOpen(!open)} style={{ background: "none", border: "none", color: C.white, cursor: "pointer", padding: 4 }} className="md:hidden">
-            {open ? <X size={22} /> : <Menu size={22} />}
+          {/* Hamburger — mobile only */}
+          <button
+            onClick={() => setOpen(!open)}
+            aria-label={open ? "Close menu" : "Open menu"}
+            style={{
+              background: "none", border: "none", color: C.white,
+              cursor: "pointer", padding: 6, borderRadius: 8,
+              display: "flex", alignItems: "center", justifyContent: "center",
+            }}
+            className="md:hidden"
+          >
+            {open ? <X size={24} /> : <Menu size={24} />}
+          </button>
+        </div>
+      </nav>
+
+      {/* Mobile drawer overlay */}
+      {open && (
+        <div
+          onClick={() => setOpen(false)}
+          style={{
+            position: "fixed", inset: 0, zIndex: 99,
+            background: "rgba(0,0,0,0.5)", backdropFilter: "blur(4px)",
+          }}
+        />
+      )}
+
+      {/* Mobile drawer panel */}
+      <div
+        style={{
+          position: "fixed", top: 0, right: 0, bottom: 0, zIndex: 200,
+          width: 280,
+          background: C.navyDeep,
+          borderLeft: `1px solid ${C.navyBorder}`,
+          display: "flex", flexDirection: "column",
+          transform: open ? "translateX(0)" : "translateX(100%)",
+          transition: "transform 0.3s cubic-bezier(0.4,0,0.2,1)",
+          boxShadow: open ? "-8px 0 40px rgba(0,0,0,0.5)" : "none",
+        }}
+        className="md:hidden"
+      >
+        {/* Drawer header */}
+        <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", padding: "20px 20px 16px", borderBottom: `1px solid ${C.navyBorder}` }}>
+          <a href="/" onClick={() => setOpen(false)} style={{ display: "flex", alignItems: "center", gap: 8, textDecoration: "none" }}>
+            <div style={{ width: 28, height: 28, borderRadius: 7, background: C.goldGrad, display: "flex", alignItems: "center", justifyContent: "center" }}>
+              <Zap size={13} color={C.navyDeep} fill={C.navyDeep} />
+            </div>
+            <span style={{ fontSize: 16, fontWeight: 800, color: C.white }}>Gig<span style={{ color: C.gold }}>Shift</span></span>
+          </a>
+          <button onClick={() => setOpen(false)} style={{ background: "none", border: "none", color: "rgba(255,255,255,0.5)", cursor: "pointer", padding: 4 }}>
+            <X size={20} />
           </button>
         </div>
 
-        {/* Mobile menu */}
-        {open && (
-          <div style={{ background: C.navyDeep, borderTop: `1px solid ${C.navyBorder}`, padding: "16px 0 20px", display: "flex", flexDirection: "column", gap: 4 }}>
-            {["#features", "#how-it-works"].map((href, i) => (
-              <a key={href} href={href} onClick={() => setOpen(false)} style={{ padding: "10px 16px", fontSize: 14, color: "rgba(255,255,255,0.8)", textDecoration: "none", fontWeight: 500 }}>
-                {["Features", "How it Works"][i]}
-              </a>
-            ))}
-            <button onClick={() => openModal("signup", "employer")} style={{ padding: "10px 16px", fontSize: 14, color: "rgba(255,255,255,0.8)", background: "none", border: "none", textAlign: "left", cursor: "pointer" }}>For Employers</button>
-            <button onClick={() => openModal("signup", "worker")} style={{ padding: "10px 16px", fontSize: 14, color: "rgba(255,255,255,0.8)", background: "none", border: "none", textAlign: "left", cursor: "pointer" }}>For Workers</button>
-            <div style={{ display: "flex", gap: 10, padding: "10px 16px 0" }}>
-              <button onClick={() => openModal("signin")} style={{ flex: 1, padding: "10px 0", borderRadius: 10, border: `1.5px solid ${C.navyBorder}`, background: "transparent", fontSize: 13, fontWeight: 600, color: C.white, cursor: "pointer" }}>Sign In</button>
-              <button onClick={() => openModal("signup")} style={{ flex: 1, padding: "10px 0", borderRadius: 10, border: "none", background: C.goldGrad, fontSize: 13, fontWeight: 700, color: C.navyDeep, cursor: "pointer" }}>Get Started</button>
-            </div>
-          </div>
-        )}
-      </nav>
+        {/* Nav links */}
+        <div style={{ padding: "12px 0", borderBottom: `1px solid ${C.navyBorder}` }}>
+          {[{ href: "#features", label: "Features" }, { href: "#how-it-works", label: "How it Works" }].map(({ href, label }) => (
+            <a key={href} href={href} onClick={() => setOpen(false)} style={{ display: "block", padding: "12px 20px", fontSize: 15, color: "rgba(255,255,255,0.75)", textDecoration: "none", fontWeight: 500 }}>
+              {label}
+            </a>
+          ))}
+          <button onClick={() => openModal("signup", "employer")} style={drawerLinkStyle}>For Employers</button>
+          <button onClick={() => openModal("signup", "worker")} style={drawerLinkStyle}>For Workers</button>
+        </div>
+
+        {/* CTA buttons */}
+        <div style={{ padding: "20px 20px", display: "flex", flexDirection: "column", gap: 10 }}>
+          {/* Sign In */}
+          <button
+            onClick={() => openModal("signin")}
+            style={{
+              display: "flex", alignItems: "center", justifyContent: "center", gap: 8,
+              width: "100%", padding: "13px 0", borderRadius: 12,
+              border: `1.5px solid ${C.navyBorder}`, background: "transparent",
+              fontSize: 14, fontWeight: 600, color: C.white, cursor: "pointer",
+            }}
+          >
+            <LogIn size={16} /> Sign In
+          </button>
+
+          {/* Get Started */}
+          <button
+            onClick={() => openModal("signup")}
+            style={{
+              display: "flex", alignItems: "center", justifyContent: "center", gap: 8,
+              width: "100%", padding: "13px 0", borderRadius: 12,
+              border: "none", background: C.goldGrad,
+              fontSize: 14, fontWeight: 700, color: C.navyDeep, cursor: "pointer",
+            }}
+          >
+            <UserPlus size={16} /> Get Started Free
+          </button>
+
+          {/* Go to Dashboard */}
+          <a
+            href="/employer/dashboard"
+            onClick={() => setOpen(false)}
+            style={{
+              display: "flex", alignItems: "center", justifyContent: "center", gap: 8,
+              width: "100%", padding: "13px 0", borderRadius: 12,
+              border: `1.5px solid rgba(201,162,39,0.4)`,
+              background: "rgba(201,162,39,0.08)",
+              fontSize: 14, fontWeight: 600, color: C.gold,
+              textDecoration: "none", cursor: "pointer",
+              boxSizing: "border-box",
+            }}
+          >
+            <LayoutDashboard size={16} /> Go to Dashboard
+          </a>
+        </div>
+      </div>
 
       {authModal && <AuthModal defaultTab={authModal} defaultRole={authRole ?? undefined} onClose={() => setAuthModal(null)} />}
     </>
@@ -96,6 +191,13 @@ const navBtnStyle: React.CSSProperties = {
   fontSize: 14, fontWeight: 500, color: "rgba(255,255,255,0.8)",
   background: "none", border: "none", borderBottom: "2px solid transparent",
   paddingBottom: 2, cursor: "pointer", transition: "all 0.2s",
+};
+
+const drawerLinkStyle: React.CSSProperties = {
+  display: "block", width: "100%", padding: "12px 20px",
+  fontSize: 15, color: "rgba(255,255,255,0.75)",
+  background: "none", border: "none", textAlign: "left",
+  cursor: "pointer", fontWeight: 500,
 };
 
 function NavLink({ href, label }: { href: string; label: string }) {
