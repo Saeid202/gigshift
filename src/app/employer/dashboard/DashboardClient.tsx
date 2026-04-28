@@ -125,7 +125,6 @@ export default function DashboardClient({ profile, shifts: initialShifts, applic
             <span style={{ fontSize: 17, fontWeight: 800, color: "#ffffff" }}>Gig<span style={{ color: "#c9a227" }}>Shift</span></span>
           </a>
         </div>
-        </div>
         <nav style={{ padding: "16px 12px", flex: 1 }}>
           {[{ icon: Building2, label: "Company Profile", key: "company" }, { icon: Briefcase, label: "Shifts", key: "shifts" }, { icon: Users, label: "Applicants", key: "applicants" }].map(item => (
             <div key={item.label} onClick={() => setActiveTab(item.key as "company" | "shifts" | "applicants")} style={{ display: "flex", alignItems: "center", gap: 10, padding: "10px 12px", borderRadius: 10, marginBottom: 4, background: activeTab === item.key ? "rgba(201,162,39,0.12)" : "transparent", color: activeTab === item.key ? "#c9a227" : "rgba(255,255,255,0.6)", fontWeight: activeTab === item.key ? 600 : 500, fontSize: 14, cursor: "pointer" }}>
