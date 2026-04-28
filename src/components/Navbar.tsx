@@ -110,8 +110,9 @@ export default function Navbar() {
           width: 280, flexDirection: "column",
           background: C.navyDeep,
           borderLeft: `1px solid ${C.navyBorder}`,
-          transform: open ? "translateX(0)" : "translateX(100%)",
-          transition: "transform 0.3s cubic-bezier(0.4,0,0.2,1)",
+          transform: open ? "translateX(0)" : "translateX(110%)",
+          visibility: open ? "visible" : "hidden",
+          transition: "transform 0.3s cubic-bezier(0.4,0,0.2,1), visibility 0.3s",
           boxShadow: open ? "-8px 0 40px rgba(0,0,0,0.5)" : "none",
         }}
       >
