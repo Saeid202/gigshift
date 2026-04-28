@@ -433,7 +433,7 @@ function AvailabilityForm({ initial, saving, onSave }: { initial: Availability; 
       </div>
       <div>
         <p style={{ fontSize: 13, fontWeight: 700, color: "#1e293b", marginBottom: 8 }}>Max Hours Per Week: <span style={{ color: PRIMARY }}>{hours}</span></p>
-        <input type="range" min={1} max={80} value={hours} onChange={e => setHours(Number(e.target.value))} style={{ width: "100%", accentcolor: PRIMARY }} />
+        <input type="range" min={1} max={80} value={hours} onChange={e => setHours(Number(e.target.value))} style={{ width: "100%", accentColor: PRIMARY }} />
         <div style={{ display: "flex", justifyContent: "space-between", fontSize: 11, color: "#94a3b8", marginTop: 4 }}>
           <span>1 hr</span><span>80 hrs</span>
         </div>
