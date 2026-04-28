@@ -190,6 +190,7 @@ export default function Navbar() {
           </a>
         </div>
       </div>
+      )}
 
       {authModal && <AuthModal defaultTab={authModal} defaultRole={authRole ?? undefined} onClose={() => setAuthModal(null)} />}
     </>
